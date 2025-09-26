@@ -17,8 +17,10 @@ function getData(){
             if (parseInt(artists[i].intMembers) > 1) {
               h1.innerHTML = artists[i].strArtist + " - " + "Band";
               img.src = artists[i].strArtistCutout
+              h2.innerHTML = artists[i].strGenre
               div.append(h1)
               div.append(img)
+              div.append(h2)
               app.append(div)
             }
         }
