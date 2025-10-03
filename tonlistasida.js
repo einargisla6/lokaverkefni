@@ -18,9 +18,22 @@ function getData(){
               h1.innerHTML = artists[i].strArtist + " - " + "Band";
               img.src = artists[i].strArtistCutout
               h2.innerHTML = artists[i].strGenre
+              p.innerHTML = artists[i].strBiographyEN
               div.append(h1)
               div.append(img)
               div.append(h2)
+              div.append(p)
+              app.append(div)
+            }
+            else {
+              h1.innerHTML = artists[i].strArtist;
+              img.src = artists[i].strArtistCutout
+              h2.innerHTML = artists[i].strGenre
+              p.innerHTML = artists[i].strBiographyEN
+              div.append(h1)
+              div.append(img)
+              div.append(h2)
+              div.append(p)
               app.append(div)
             }
         }
@@ -29,4 +42,4 @@ function getData(){
         console.error("Error fetching:", error);
       });
 }
-//strArtist, strStyle, strGenre, strBiography, strArtistCutout
+//strArtist, strStyle, strGenre, strBiographyEN, strArtistCutout
