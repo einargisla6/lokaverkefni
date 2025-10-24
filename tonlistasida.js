@@ -13,11 +13,14 @@ function getData(){
             var h2 = document.createElement("h2")
             var p = document.createElement("p")
             var button = document.createElement("button");
+            var favBtn = document.createElement("button");
             if (parseInt(artists[i].intMembers) > 1) {
               h1.innerHTML = artists[i].strArtist;
               img.src = artists[i].strArtistCutout
               h2.innerHTML = artists[i].strGenre
               button.textContent = "More info";
+              favBtn.innerHTML = "★";
+              favBtn.classList.add("favorite-btn");
               button.onclick = (function(artist) {
                 return function() {
                   document.getElementById("modal-name").textContent = artist.strArtist;
@@ -33,6 +36,7 @@ function getData(){
               div.append(img)
               div.append(h2)
               div.append(button)
+              div.append(favBtn)
               //div.append(p)
               app.append(div)
             }
@@ -41,11 +45,14 @@ function getData(){
               h1.innerHTML = artists[i].strArtist;
               img.src = artists[i].strArtistCutout
               h2.innerHTML = artists[i].strGenre
+              favBtn.innerHTML = "★";
+              favBtn.classList.add("favorite-btn");
               //p.innerHTML = artists[i].strBiographyEN
               div.append(h1)
               div.append(img)
               div.append(h2)
               div.append(button)
+              div.append(favBtn)
               //div.append(p)
               app.append(div)
               button.textContent = "More info";
@@ -57,7 +64,7 @@ function getData(){
                   document.getElementById("modal-bio").textContent = artist.strBiographyEN || "No biography available.";
 
                   document.getElementById("artistModal").style.display = "block";
-            };
+                };
               })(artists[i]);
             }
             document.querySelector(".close").onclick = function() {
@@ -66,10 +73,29 @@ function getData(){
 
 // Close modal when clicking outside
             window.onclick = function(event) {
-            if (event.target === document.getElementById("artistModal")) {
-              document.getElementById("artistModal").style.display = "none";
-            }
+              if (event.target === document.getElementById("artistModal")) {
+                document.getElementById("artistModal").style.display = "none";
+              }
             };
+            favBtn.onclick = (function (artist, btn) {
+              console.log(artist)
+              var artistId = artist.idArtist
+                let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+                if (favorites.includes(artistId)) {
+                  // fjarlægja
+                  favorites = favorites.filter(id => id !== artistId);
+                  btn.classList.remove("active");
+                  alert("fjarlæga")
+                } else {
+                  // bæta við
+                  favorites.push(artistId);
+                  btn.classList.add("active");
+                  alert("bæta við")
+                }
+
+                localStorage.setItem("favorites", JSON.stringify(favorites));
+              })(artists[i],favBtn);
+            
         }
       })
       .catch(error => {
