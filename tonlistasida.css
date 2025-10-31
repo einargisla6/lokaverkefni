@@ -48,15 +48,8 @@ body {
 }
 
 .artist-card {
-    background-color: #1a1a1a;
-    border-radius: 12px;
-    overflow: hidden;
-    text-align: center;
-    color: white;
-    padding: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    position: relative;
+  position: relative;          /* þarf svo .button-row geti verið staðsett inni í kortinu */
+  padding-bottom: 60px;        /* pláss fyrir takkarnir neðst */
 }
 
 .artist-card:hover {
@@ -76,11 +69,16 @@ body {
     font-size: 20px;
     margin: 10px 0 5px;
     color: #08CB00; /* matches your navbar green */
+    text-align: center;
+}
+.artist-card h1{
+    text-align: center;
 }
 
 .artist-card p {
     font-size: 14px;
     color: #ccc;
+    text-align: center;
 }
 .modal {
     display: none; /* Hidden by default */
@@ -147,19 +145,59 @@ body {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 24px;
+  font-size: 22px;
   color: #aaa;
   transition: color 0.3s ease, transform 0.2s ease;
-  position: absolute;
-  top: 10px;
-  right: 10px;
 }
 
 .favorite-btn:hover {
-  color: #08CB00; /* sama græna og þú notar */
+  color: #08CB00;
   transform: scale(1.1);
 }
 
 .favorite-btn.active {
-  color: #FFD700; /* gull þegar valið */
+  color: #FFD700;
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;     /* miðjar "More Info" í miðju */
+  align-items: center;
+  gap: 8px;                    /* bil milli hnappanna */
+  margin-top: 15px;
+  position: absolute;
+  bottom: 15px;                /* fest neðst í boxinu */
+  left: 0;
+  width: 100%;
+}
+
+/* standard More Info hnappur - gera hann inline-flex til miðjunar */
+.artist-card button.info-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #08CB00;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s
+}
+.button {
+  background-color: #08CB00;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.button:hover {
+  background-color: #06a300;
+  transform: translateY(-2px);
 }

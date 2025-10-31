@@ -8,7 +8,9 @@ function getData(){
         var app = document.getElementById("app")
         for (var i = 0; i < artists.length; i++) {
             var div = document.createElement("div")
+            var buttonRow = document.createElement("div");
             div.classList.add("artist-card")
+            buttonRow.classList.add("button-row");
             var h1 = document.createElement("h1")
             var img = document.createElement("img")
             var h2 = document.createElement("h2")
@@ -22,6 +24,8 @@ function getData(){
               button.textContent = "More info";
               favBtn.innerHTML = "★";
               favBtn.classList.add("favorite-btn");
+              buttonRow.append(button);
+              buttonRow.append(favBtn);
               button.onclick = (function(artist) {
                 return function() {
                   document.getElementById("modal-name").textContent = artist.strArtist;
@@ -36,8 +40,7 @@ function getData(){
               div.append(h1)
               div.append(img)
               div.append(h2)
-              div.append(button)
-              div.append(favBtn)
+              div.append(buttonRow);
               //div.append(p)
               app.append(div)
             }
@@ -48,12 +51,14 @@ function getData(){
               h2.innerHTML = artists[i].strGenre
               favBtn.innerHTML = "★";
               favBtn.classList.add("favorite-btn");
+              buttonRow.classList.add("button-row");
               //p.innerHTML = artists[i].strBiographyEN
+              buttonRow.append(button);
+              buttonRow.append(favBtn);
               div.append(h1)
               div.append(img)
               div.append(h2)
-              div.append(button)
-              div.append(favBtn)
+              div.append(buttonRow);
               //div.append(p)
               app.append(div)
               button.textContent = "More info";
@@ -78,7 +83,9 @@ function getData(){
                 document.getElementById("artistModal").style.display = "none";
               }
             };
-            favBtn.onclick = (function (artist, btn) {
+            var artist = artists[i]
+            var btn = favBtn
+            favBtn.onclick = function (e) {
               console.log(artist)
               var artistId = artist.idArtist
                 let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -95,7 +102,7 @@ function getData(){
                 }
 
                 localStorage.setItem("favorites", JSON.stringify(favorites));
-              })(artists[i],favBtn);
+              }
             
         }
       })
@@ -115,8 +122,9 @@ function loadFavorites() {
       .then(function (response) {
         var artist = response.data.artists[0];
         var div = document.createElement("div");
+        var buttonRow = document.createElement("div");
         div.classList.add("artist-card");
-
+        buttonRow.classList.add("button-row");
         var h1 = document.createElement("h1");
         var img = document.createElement("img");
         var h2 = document.createElement("h2");
@@ -129,6 +137,8 @@ function loadFavorites() {
         button.textContent = "More info";
         favBtn.innerHTML = "★";
         favBtn.classList.add("favorite-btn", "active");
+        buttonRow.append(button);
+        buttonRow.append(favBtn);
 
         // More info modal
         button.onclick = function () {
@@ -149,8 +159,7 @@ function loadFavorites() {
         div.append(h1);
         div.append(img);
         div.append(h2);
-        div.append(button);
-        div.append(favBtn);
+        div.append(buttonRow);
         app.append(div);
       });
   });
