@@ -148,12 +148,20 @@ function loadFavorites() {
           document.getElementById("modal-bio").textContent = artist.strBiographyEN || "No biography available.";
           document.getElementById("artistModal").style.display = "block";
         };
-
+        
         favBtn.onclick = function () {
           let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+          if (favorites.includes(artist.idArtist)) {
+          // Unfavorite: remove from list and toggle star off
           favorites = favorites.filter(favId => favId !== artist.idArtist);
+          favBtn.classList.remove("active");
+          } else {
+          favorites.push(artist.idArtist);
+          favBtn.classList.add("active");
+          }
+
           localStorage.setItem("favorites", JSON.stringify(favorites));
-          div.remove(); // fjarlægja kortið þegar notandi affavorítar
         };
 
         div.append(h1);

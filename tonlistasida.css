@@ -7,36 +7,70 @@ body {
     box-sizing: border-box;
 }
 .topnav {
-    overflow: hidden;
-    background-color: #08CB00;
-    padding: 5px;
+  background-color: black;
+  border-bottom: 3px solid #08CB00;
+  box-shadow: 0 0 12px #08CB00;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
-/* Make input + button align nicely */
 .search-container {
-    display: flex;
-    justify-content: flex-end; /* aligns to the right */
-    align-items: center;
-    gap: 8px; /* space between input and button */
+  display: flex;
+  align-items: stretch;
+  border: 3px solid #08CB00;          /* neon green border */
+  border-radius: 12px;
+  overflow: hidden;                   /* ensures no gaps between input/button */
+  box-shadow: 0 0 12px #08CB00;       /* glowing effect */
 }
 
-.search-container input[type=text] {
-    padding: 6px;
-    border: none;
-    font-size: 17px;
-    border-radius: 5px;
-    background-color: black;
-    color: white;
+.search-container:focus-within {
+  box-shadow: 0 0 16px rgba(8,203,0,0.8);
+}
+
+.search-container input[type="text"] {
+  flex: 1;
+  background-color: black;
+  color: white;
+  border: none;
+  outline: none;
+  padding: 12px 14px;
+  font-size: 16px;
+}
+
+.search-container input[type="text"]:focus {
+  box-shadow: 0 0 8px #08CB00;
+  border-color: #08CB00;
+}
+
+.search-container input::placeholder {
+  color: #bbb;
 }
 
 .search-container button {
-    padding: 6px 12px;
-    border: none;
-    border-radius: 5px;
-    background-color: white;
-    cursor: pointer;
-    font-size: 15px;
+  background-color: #08CB00;
+  color: black;
+  border: none;
+  outline: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
+
+
+.search-container button:active {
+  background-color: #048c00;
+  transform: translateY(0);
+}
+
+.search-container button span,
+.search-container button i {
+  vertical-align: middle;
+}
+
 #app{
     color: white
 }
