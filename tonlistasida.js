@@ -1,6 +1,9 @@
 
 function getData(){
   var texti = document.getElementById("leit").value
+  if (texti === "") {
+    return alert("Please type an artist name to search 🎧")
+  }
   document.getElementById("leit").value = ""
   axios.get("https://www.theaudiodb.com/api/v1/json/123/search.php?s=" +texti)
       .then(function (response) {
@@ -73,16 +76,7 @@ function getData(){
                 };
               })(artists[i]);
             }
-            document.querySelector(".close").onclick = function() {
-            document.getElementById("artistModal").style.display = "none";
-            };
 
-// Close modal when clicking outside
-            window.onclick = function(event) {
-              if (event.target === document.getElementById("artistModal")) {
-                document.getElementById("artistModal").style.display = "none";
-              }
-            };
             var artist = artists[i]
             var btn = favBtn
             favBtn.onclick = function (e) {
@@ -174,6 +168,17 @@ function loadFavorites() {
 }
 window.onload = function() {
   loadFavorites();
+};
+// Close modal with X button
+document.querySelector(".close").onclick = function() {
+    document.getElementById("artistModal").style.display = "none";
+};
+
+// Close modal when clicking outside of it
+window.onclick = function(event) {
+    if (event.target === document.getElementById("artistModal")) {
+        document.getElementById("artistModal").style.display = "none";
+    }
 };
 //strArtist, strStyle, strGenre, strBiographyEN, strArtistCutout
 // spyrja chat um MODAL
